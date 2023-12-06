@@ -14,16 +14,16 @@ class History
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?int $firstIn = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?int $secondIn = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?int $firstOut = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?int $secondOut = null;
 
     #[ORM\Column]

@@ -5,6 +5,6 @@ controllers:
     type: attribute
 
 api_exchange:
-    path: /api/exchange
-    controller: App\Controller\ApiExchangeController::index
+    path: /exchange/values
+    controller: App\Controller\ApiExchangeController::exchangeValues
     methods: [POST]
