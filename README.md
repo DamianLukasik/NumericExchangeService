@@ -112,7 +112,7 @@ W odpowiedzi powinnieneś dostać:
             "created_at": "2023-12-06 19:04:48",
             "updated_at": "2023-12-06 19:04:48"
         },
-        (...)
+        ...
     ],
     "pagination": {
         "total_items": 33,
