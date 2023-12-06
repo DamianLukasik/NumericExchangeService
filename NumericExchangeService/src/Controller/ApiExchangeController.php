@@ -79,6 +79,59 @@ class ApiExchangeController extends AbstractController
         }
     }
 
+    #[Route('/exchange/history/showAllRecords', name: 'api_exchange_history_show_all_records', methods: ['GET', 'POST'])]
+    public function getShowAllRecordsFromHistory(Request $request): JsonResponse
+    {
+        try {
+            $data = json_decode($request->getContent(), true);
+
+            $page = isset($data['page']) ? (int)$data['page'] : 1;
+            $limit = isset($data['limit']) ? (int)$data['limit'] : 10;
+            $sort = isset($data['sort']) ? (string)$data['sort'] : 'id';
+            $order = isset($data['order']) ? (string)$data['order'] : 'asc';
+
+            $totalCount = count($this->entityManager->getRepository(History::class)->findAll());
+            $totalPages = ceil($totalCount/$limit);
+
+            $historyRepository = $this->entityManager->getRepository(History::class);
+            $page = ($totalPages < $page) ? $totalPages : $page;
+            $history = $historyRepository->findBy([], [$sort => $order], $limit, ($page - 1) * $limit);
+            $itemsCount = count($history);
+
+            $data = [];
+            foreach ($history as $record) {
+                $data[] = [
+                    'first_in' => $record->getFirstIn(),
+                    'second_in' => $record->getSecondIn(),
+                    'first_out' => $record->getFirstOut(),
+                    'second_out' => $record->getSecondOut(),
+                    'created_at' => $record->getCreatedAt()->format('Y-m-d H:i:s'),
+                    'updated_at' => $record->getUpdatedAt()->format('Y-m-d H:i:s'),
+                ];
+            }
+
+            return $this->json([
+                'status' => 'success',
+                'message' => 'Request completed correctly.',
+                'data' => $data,
+                'pagination' => [
+                    'total_items' => $totalCount,
+                    'items_per_page' => $itemsCount,
+                    'current_page' => $page,
+                    'total_pages' => $totalPages
+                ],
+            ]);
+        } catch (\Exception $e) {
+            $this->logger->error('An error occurred: ' . $e->getMessage());
+            return $this->json([
+                'status' => 'error',
+                'message' => 'An error occurred. Please try again later.',
+                'details' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //helper functions
     private function swap(int &$first, int &$second): void {
         $first = $first + $second;
         $second = $first - $second;
