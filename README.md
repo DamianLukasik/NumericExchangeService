@@ -56,8 +56,8 @@ Przejdź do zakładki "Body". Wybierz opcję "raw" i ustaw typ na "JSON". Wprowa
 ```
 
 Gdzie:
-first - liczba całkowita
-second - liczba całkowita
+- first - liczba całkowita
+- second - liczba całkowita
 
 W odpowiedzi powinnieneś dostać:
 
@@ -90,10 +90,10 @@ Przejdź do zakładki "Body". Wybierz opcję "raw" i ustaw typ na "JSON". Wprowa
 ```
 
 Gdzie:
-page - strona
-limit - liczba rekordów (wierszy) na stronie
-sort - sortowanie po danej kolumnie (dostępne kolumny to: id, firstIn, secondIn, firstOut, secondOut, createdAt, updatedAt)
-order - sortowanie malejęce (desc) lub rosnące (asc)
+- page - strona
+- limit - liczba rekordów (wierszy) na stronie
+- sort - sortowanie po danej kolumnie (dostępne kolumny to: id, firstIn, secondIn, firstOut, secondOut, createdAt, updatedAt)
+- order - sortowanie malejęce (desc) lub rosnące (asc)
 
 Przy czym w przypadku ustawienia strony (page) na liczbę większą od liczby dostępnych stron, ustawiana jest ostatnia strona (page)
 
